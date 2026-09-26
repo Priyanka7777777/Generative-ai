@@ -59,6 +59,91 @@ Consistent API:
 
 ---
 
+## Technical Explanation — How the Key Algorithms Work
+
+### Logistic Regression
+Despite the name, this is a **classification** algorithm, not regression.
+
+It learns a decision boundary — a line (or hyperplane in higher dimensions) that separates classes.
+
+**How it works:**
+1. Computes a weighted sum: `z = w·x + b` (a dot product of weights and features)
+2. Passes through sigmoid: `p = 1 / (1 + e^(-z))` → outputs a probability between 0 and 1
+3. If p > 0.5 → Class 1. If p < 0.5 → Class 0.
+4. Trained by minimising binary cross-entropy loss using gradient descent
+
+**When to use:** When you want fast, interpretable results. Often a strong baseline. Works best when data is linearly separable.
+
+**Limitation:** Can't learn curved decision boundaries. Real data is rarely linearly separable.
+
+---
+
+### Random Forest
+A **collection of decision trees** that vote on the answer.
+
+**How a Decision Tree works:**
+- At each node, it asks a yes/no question: "Is age > 35?"
+- It picks the question that best separates the classes (highest information gain)
+- Keeps splitting until it reaches a leaf (final prediction)
+
+**How Random Forest improves on a single tree:**
+1. Train 100 decision trees on random subsets of the data (bagging)
+2. Each tree also uses a random subset of features
+3. At prediction time, all 100 trees vote — majority wins
+4. This reduces overfitting dramatically (one tree overfits; 100 average out the noise)
+
+**When to use:** Excellent all-around algorithm. Handles mixed feature types, missing values, and non-linear patterns. Hard to overfit badly. Good starting point for tabular data.
+
+---
+
+### SVM (Support Vector Machine)
+Finds the **widest possible margin** between two classes.
+
+**How it works:**
+- Draws a boundary that separates classes AND maximises the distance (margin) to the nearest points from each class
+- Those nearest points are called **support vectors** — they define the boundary
+- The **kernel trick** lets SVM find non-linear boundaries by projecting data into higher dimensions where it IS linearly separable
+  - `kernel='rbf'` (radial basis function) → handles curved boundaries
+  - `kernel='linear'` → straight line boundary only
+
+**When to use:** Works well on small-to-medium datasets, especially text classification. Sensitive to feature scaling — always normalise first.
+
+---
+
+### K-Means Clustering
+Groups data into K clusters by iteratively finding cluster centres.
+
+**How it works:**
+1. Place K random centroids (cluster centres) in the data space
+2. Assign every point to the nearest centroid (by Euclidean distance)
+3. Move each centroid to the mean of all points assigned to it
+4. Repeat steps 2–3 until centroids stop moving
+
+```
+Iteration 1:          Iteration 2:          Converged:
+  C1*  C2*              C1→  C2→              C1●  C2●
+  . . . .               . . . .               . . . .
+  . . . .               . . . .               . . . .
+```
+
+**When to use:** When you want to discover natural groups in unlabelled data. You must specify K in advance — use the elbow method to find the right K.
+
+---
+
+### PCA (Principal Component Analysis)
+Compresses high-dimensional data into fewer dimensions while keeping the most important information.
+
+**How it works:**
+1. Centre the data (subtract mean)
+2. Find the direction of maximum variance (first principal component)
+3. Find the next direction of maximum variance that is perpendicular to the first (second PC)
+4. Project all data onto these new axes
+5. Keep only the top N components — you've reduced dimensions
+
+**When to use:** Visualise high-dimensional data (reduce to 2D for plotting). Remove noise. Speed up training by reducing features.
+
+---
+
 ## Part 1: Classification
 
 ```python

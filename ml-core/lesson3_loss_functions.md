@@ -172,6 +172,25 @@ print(f"Uncertain: {categorical_cross_entropy(y_true, y_pred_uncertain):.3f}")  
 
 ---
 
+## Key Terms
+
+| Term | Definition |
+|------|-----------|
+| Loss function | A formula that produces a single number measuring how wrong the model's prediction was. Lower = better. Training = minimize this number. |
+| MSE | Mean Squared Error. Average of squared differences between prediction and truth. Penalises large errors heavily (squares them). Used for regression. |
+| MAE | Mean Absolute Error. Average of absolute differences. Treats all errors equally. More robust to outliers than MSE. |
+| RMSE | Root Mean Squared Error. Square root of MSE. Same units as the target — easier to interpret. |
+| Cross-entropy | Measures the distance between two probability distributions. The model's output probabilities vs the true one-hot labels. Standard loss for classification. |
+| Binary cross-entropy (BCE) | Cross-entropy for 2-class problems. Output layer uses sigmoid. Formula: `-[y·log(p) + (1-y)·log(1-p)]` |
+| Categorical cross-entropy (CCE) | Cross-entropy for 3+ class problems. Output layer uses softmax. Formula: `-Σ y_i · log(p_i)` |
+| Logit | Raw, unnormalised score output by the last layer before any activation function. Passed to sigmoid (binary) or softmax (multi-class). |
+| One-hot encoding | Representing a class as a binary vector. Class 1 out of 3 → [0, 1, 0]. Required format for CCE. |
+| Softmax | Converts a vector of logits into probabilities that sum to 1. Used in multi-class output layer before CCE. |
+| Sigmoid | Converts a single logit to a probability between 0 and 1. Used in binary classification output layer before BCE. |
+| Gradient of loss | The derivative of the loss with respect to each weight. Tells the optimizer which direction to move each weight to reduce loss. |
+
+---
+
 ## Summary: Which Loss to Use?
 
 ```

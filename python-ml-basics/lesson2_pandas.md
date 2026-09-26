@@ -49,6 +49,67 @@ Last col = label (what you want to predict)
 
 ---
 
+## Technical Explanation — How Pandas Works
+
+### DataFrame and Series Under the Hood
+A **DataFrame** is essentially a dictionary of **Series** objects, where each key is a column name and each value is a column of data.
+
+A **Series** is a one-dimensional array with a labelled index. Think of it as a NumPy array with named rows.
+
+```
+DataFrame = {
+    'age':    Series([32, 45, 28, 51]),
+    'salary': Series([75000, 92000, 58000, 110000]),
+}
+```
+
+Each Series has a **dtype** (data type) — `int64`, `float64`, `object` (string), `bool`, `datetime64`. Pandas operations are fast because each column is a contiguous block of the same dtype in memory — just like a NumPy array.
+
+### Indexing — How Pandas Selects Data
+
+Pandas has two indexing systems:
+- **`.iloc[]`** — **integer-based** (position): `df.iloc[0]` = first row by position number
+- **`.loc[]`** — **label-based** (condition/name): `df.loc[df['age'] > 40]` = filter by condition
+
+This is a source of confusion for beginners — always ask "do I want by position or by condition?"
+
+### Why Pandas Outperforms Plain Python Loops
+
+When you write `df['salary'] * 1.1`, Pandas applies the multiplication to the entire column in one C-level operation — no Python loop. This is called **vectorisation**, same principle as NumPy.
+
+For 1 million rows:
+- Python loop: ~0.5 seconds
+- Pandas vectorised: ~0.002 seconds (250× faster)
+
+### Missing Data (NaN) — Why It Matters for ML
+
+Real-world datasets almost always have missing values. If you feed `NaN` values into a model, it will produce `NaN` predictions — the entire forward pass becomes NaN and the model breaks.
+
+Strategies:
+- **Drop rows**: `df.dropna()` — safe when you have lots of data
+- **Fill with mean**: `df.fillna(df.mean())` — most common for numerical columns
+- **Fill with mode**: `df.fillna(df.mode().iloc[0])` — for categorical columns
+- **Forward fill**: `df.ffill()` — for time series data (fill with previous value)
+
+### Categorical Encoding — Why ML Needs Numbers
+
+Neural networks and most ML algorithms only work with numbers. Text categories like `['Eng', 'Mkt', 'Sales']` must be converted.
+
+**Label encoding** (`[0, 1, 2]`) implies an ordering — `Sales > Mkt > Eng` numerically — which is wrong for most categories. Only use it for ordinal data (like `['low', 'medium', 'high']`).
+
+**One-hot encoding** creates a separate binary column for each category — no false ordering implied. Use this for nominal categories (no natural order). The downside: if a column has 100 unique values, you get 100 new columns (high cardinality problem).
+
+### `groupby` — The SQL GROUP BY Equivalent
+
+```python
+df.groupby('department')['salary'].mean()
+```
+This is equivalent to SQL: `SELECT department, AVG(salary) FROM df GROUP BY department`
+
+Under the hood: split the DataFrame by unique values in 'department', apply `.mean()` to each group, combine results.
+
+---
+
 ## Code — Everything You Need
 
 ```python

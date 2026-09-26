@@ -210,6 +210,24 @@ Rule 6: Big gap between train/val = overfitting → regularize or get more data
 
 ---
 
+## Key Terms
+
+| Term | Definition |
+|------|-----------|
+| Training set | The data the model learns from. Weights are updated based on this data. |
+| Validation set | Data held out during training. Used to tune hyperparameters and detect overfitting early. Never used to update weights. |
+| Test set | Completely unseen data. Touched only once at the very end to get an honest accuracy score. |
+| Overfitting | Model memorised the training data. High train accuracy, low test accuracy. Big gap between the two. |
+| Underfitting | Model is too simple to learn the patterns. Both train and test accuracy are low. |
+| Data leakage | Test set information accidentally contaminates the training process (e.g., normalising before splitting). Gives falsely high scores that won't hold in production. |
+| Stratify | Ensures each split keeps the same class proportions as the full dataset. Critical for imbalanced datasets (e.g., 95% class 0, 5% class 1). |
+| K-Fold CV | Split data into K equal parts. Train K times, each time using a different part as the test set. Final score = average of K scores. More reliable than a single split. |
+| cross_val_score | Sklearn utility that runs K-Fold CV automatically and returns all K scores. |
+| Early stopping | Stop training when validation loss starts increasing — prevents overfitting by not training too long. |
+| Generalisation | A model's ability to perform well on new, unseen data it wasn't trained on. The whole point of train/test splitting. |
+
+---
+
 ## Exercise
 1. Split `make_classification(n_samples=500)` into 70/15/15. Print sizes.
 2. Train logistic regression, get train AND test accuracy. Is there overfitting?

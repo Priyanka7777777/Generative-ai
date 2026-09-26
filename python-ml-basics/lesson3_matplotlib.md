@@ -8,14 +8,21 @@
 
 ## Analogy
 
-Matplotlib is the **printer for your data** — it turns numbers into pictures.
+Imagine you're a doctor. You have a patient's heart rate logged every second for 24 hours — that's 86,400 numbers. You can't diagnose anything by reading 86,400 numbers.
 
-In ML you need to see your data because:
-- Numbers lie, pictures reveal patterns
-- You can't understand 10,000 rows of numbers — but you can see a scatter plot
-- Training curves tell you if the model is learning, overfitting, or broken
+But the moment you **plot it as a line graph**, patterns jump out: a spike at 3pm (exercise), a dip at 11pm (sleep), an alarming flatline at 6am. The picture reveals what the numbers hide.
+
+**Matplotlib is that graph for your data and your model.**
+
+In ML, you need to see:
+- Is my model learning, or is it stuck? → **training curve**
+- Are my two classes separable? → **scatter plot**
+- Is my data normally distributed? → **histogram**
+- Which classes is my model confusing? → **confusion matrix heatmap**
 
 > "A loss curve going up means something is very wrong. You'd never know from the numbers alone."
+
+Without Matplotlib you are flying blind. With it, every training run tells a story.
 
 ---
 
@@ -171,6 +178,27 @@ Underfitting:
 Learning rate too high:
   Loss bounces up and down wildly or goes to NaN
 ```
+
+---
+
+## Key Terms
+
+| Term | Definition |
+|------|-----------|
+| Figure | The entire canvas / window that holds one or more plots. Created with `plt.figure()`. |
+| Axes | A single plot area inside a figure. Has its own x-axis, y-axis, title and data. When you use subplots, each cell is one Axes object. |
+| Subplot | Dividing one figure into a grid of multiple plots. `plt.subplots(1, 2)` = one row, two columns. |
+| Line plot | Chart type for continuous data over a sequence (e.g., loss over epochs). `plt.plot()`. |
+| Scatter plot | Chart type showing individual data points. Good for seeing clusters and relationships. `plt.scatter()`. |
+| Histogram | Chart type showing the distribution/frequency of a single variable. `plt.hist()`. |
+| Bar chart | Chart type comparing discrete categories. `plt.bar()`. |
+| Heatmap | Colour-coded grid showing values — used for confusion matrices. `plt.imshow()`. |
+| Legend | A key explaining what each line or colour represents. `plt.legend()`. |
+| colorbar | Colour scale legend for heatmaps — maps colour → value. `plt.colorbar()`. |
+| alpha | Transparency level (0=invisible, 1=solid). Used in scatter plots to show overlapping points. |
+| figsize | Width and height of the figure in inches: `plt.figure(figsize=(8, 4))`. |
+| tight_layout | Automatically adjusts spacing so labels and titles don't overlap. Always call before `plt.show()`. |
+| Training curve | A line plot of training loss AND validation loss over epochs. The single most important diagnostic chart in ML. |
 
 ---
 

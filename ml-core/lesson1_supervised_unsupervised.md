@@ -178,6 +178,27 @@ plt.show()
 
 ---
 
+## Key Terms
+
+| Term | Definition |
+|------|-----------|
+| Supervised learning | Learning with labelled examples — both features (X) and correct answers (y) are given. The model learns to map X → y. |
+| Unsupervised learning | Learning without labels — only features (X) are given. The model finds patterns, groups, or structure on its own. |
+| Self-supervised learning | The data generates its own labels. Used to train LLMs: the text predicts its next word, no human annotation needed. |
+| Semi-supervised learning | Uses a small amount of labelled data combined with a large amount of unlabelled data. Common in practice when labelling is expensive. |
+| Classification | Supervised task where the output is a discrete category (spam/not spam, cat/dog/bird, digit 0-9). |
+| Regression | Supervised task where the output is a continuous number (house price, temperature, stock price). |
+| Clustering | Unsupervised task of grouping similar data points together. The groups are discovered automatically — no predefined labels. |
+| Dimensionality reduction | Unsupervised task of compressing high-dimensional data into fewer dimensions while preserving structure. Used for visualisation and noise removal. |
+| Label | The target variable (y) — the correct answer you're trying to predict in supervised learning. |
+| Feature | An input variable (column in X) — a measurable property of the data used to make predictions. |
+| K-Means | An unsupervised clustering algorithm that assigns data points to K clusters by iteratively updating cluster centres (centroids). |
+| PCA | Principal Component Analysis. Unsupervised dimensionality reduction that finds the directions of maximum variance in the data. |
+| Anomaly detection | Unsupervised task of identifying unusual data points that don't fit the normal pattern (e.g., fraud detection, fault detection). |
+| Decision boundary | The line (or surface in higher dimensions) that separates different classes in the feature space. Classification models learn this boundary. |
+
+---
+
 ## Quick Reference
 
 | | Supervised | Unsupervised |

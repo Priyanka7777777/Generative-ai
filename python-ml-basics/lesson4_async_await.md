@@ -8,13 +8,23 @@
 
 ## Analogy
 
-You go to a restaurant. You give the waiter your order.
+You're managing a busy kitchen. You have 5 chefs and 10 orders come in.
 
-**Blocking (normal code):** The waiter stands at your table staring at you until your food is ready. Nobody else gets served.
+**Blocking (synchronous) kitchen:**
+One chef handles Order 1 from start to finish — chops, cooks, plates. Only then starts Order 2. The other 4 chefs stand idle. 10 orders × 10 minutes each = **100 minutes**.
 
-**Non-blocking (async):** The waiter takes your order, walks away, takes orders from 5 other tables, and comes back when YOUR food is ready.
+**Non-blocking (async) kitchen:**
+Chef 1 starts Order 1 — puts it on the stove to simmer. While it simmers, Chef 1 preps Order 2. Chef 2 starts Order 3. All 5 chefs work on different orders simultaneously. When Order 1 is done simmering, a chef finishes plating it. All 10 orders done in **~20 minutes**.
 
-> async/await = don't wait around doing nothing. While waiting for one thing, do other things.
+That's `asyncio`. The stove simmering = waiting for an API response. The chef not standing idle = `await` lets the event loop run other tasks while waiting.
+
+**In AI engineering specifically:**
+Every LLM call takes 2–5 seconds. If you're building:
+- A chatbot that calls 5 tools → without async: 15s, with async: 3s
+- A batch processor of 100 documents → without async: 500s (~8 min), with async: ~10s
+- A multi-agent system where each agent calls an LLM → async makes it 10× faster
+
+This is not an optimisation — it's the difference between a usable product and an unusable one.
 
 ---
 
@@ -192,6 +202,27 @@ Rule 5: use AsyncAnthropic / AsyncOpenAI clients for LLM calls
 | Call LLM 10x in parallel | `await asyncio.gather(*[call(q) for q in questions])` |
 | Stream response to user | `async for text in stream.text_stream` |
 | Multiple tool calls in agent | `await asyncio.gather(tool1(), tool2(), tool3())` |
+
+---
+
+## Key Terms
+
+| Term | Definition |
+|------|-----------|
+| Coroutine | A function defined with `async def`. Calling it returns a coroutine object — it does NOT run immediately. You must `await` it or pass it to `asyncio.run()` to execute it. |
+| `async def` | Declares a coroutine function. Any function that uses `await` inside it must be declared with `async def`. |
+| `await` | Pauses the current coroutine and hands control back to the event loop, which can run other tasks while waiting. Only valid inside an `async def` function. |
+| Event loop | The heart of asyncio. A single-threaded scheduler that manages all coroutines — it runs one at a time but switches between them when they hit `await` points. |
+| `asyncio.run()` | Creates a new event loop, runs a coroutine to completion, and closes the loop. The standard entry point for async code. Call it once at the top level. |
+| `asyncio.gather()` | Takes multiple coroutines and runs them all concurrently. Returns a list of their results in the same order. The key tool for parallel LLM calls. |
+| `asyncio.sleep()` | Non-blocking sleep. Unlike `time.sleep()`, it yields control to the event loop during the wait — other tasks can run. Used to simulate API calls in examples. |
+| Concurrency | Multiple tasks making progress at the same time (not necessarily running simultaneously on multiple CPUs — they interleave during I/O waits). Different from parallelism. |
+| I/O-bound task | A task that spends most of its time waiting for input/output (network call, file read, database query). Async is perfect for these. |
+| CPU-bound task | A task that spends time doing computation (matrix multiply, image processing). Async does NOT help here — use multiprocessing instead. |
+| `AsyncAnthropic` | The async version of the Anthropic client. Must use this (not `anthropic.Anthropic`) for `await`-based API calls. Same for `AsyncOpenAI`. |
+| `async for` | Iterates over an async generator — used when streaming LLM responses token by token. |
+| `async with` | Context manager for async resources — used when opening async streams or connections. |
+| `return_exceptions=True` | Option for `asyncio.gather()` — instead of crashing if one coroutine fails, returns the exception as a result. Critical for production code where some calls may fail. |
 
 ---
 
