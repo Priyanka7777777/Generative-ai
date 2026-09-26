@@ -18,11 +18,13 @@ Teaching style: Analogy → ASCII Diagram (architecture/flow) → Technical → 
 | W2 | Pandas — loading & preparing data | python-ml-basics/ | ✅ Taught |
 | W3 | Matplotlib — visualizing data | python-ml-basics/ | ✅ Taught |
 | W4 | async/await — concurrent API calls | python-ml-basics/ | ✅ Taught |
+| W5 | Pydantic — data validation | python-ml-basics/ | ✅ Taught |
 | M1 | Linear Algebra for ML | [math-foundations/](math-foundations/) | ✅ Taught |
 | M2 | Probability & Statistics for ML | math-foundations/ | ✅ Taught |
 | C1 | Supervised vs Unsupervised Learning | [ml-core/](ml-core/) | ✅ Taught |
 | C2 | Train/Test Split & Cross-Validation | ml-core/ | ✅ Taught |
 | C3 | Loss Functions (MSE, BCE, CCE) | ml-core/ | ✅ Taught |
+| C4 | scikit-learn — ML toolkit | ml-core/ | ✅ Taught |
 
 ### MONTH 1 — FOUNDATIONS (October 2026)
 | # | Concept | Folder | Status |
@@ -30,7 +32,7 @@ Teaching style: Analogy → ASCII Diagram (architecture/flow) → Technical → 
 | 1 | Neural Networks | [neural-networks/](neural-networks/) | ✅ Taught |
 | 2 | Gradient Descent & Optimizers | neural-networks/ | ✅ Taught |
 | 3 | Overfitting & Regularization | neural-networks/ | ⏳ Pending |
-| 4 | PyTorch Basics | pytorch/ | ⏳ Pending |
+| 4 | PyTorch — deep learning framework | [pytorch/](pytorch/) | ✅ Taught |
 | 5 | Attention Mechanism | transformers/ | ⏳ Pending |
 | 6 | Self-Attention & Multi-Head Attention | transformers/ | ⏳ Pending |
 | 7 | Transformer Architecture | transformers/ | ⏳ Pending |
