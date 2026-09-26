@@ -31,7 +31,7 @@ Teaching style: Analogy → ASCII Diagram (architecture/flow) → Technical → 
 |---|---------|--------|--------|
 | 1 | Neural Networks | [neural-networks/](neural-networks/) | ✅ Taught |
 | 2 | Gradient Descent & Optimizers | neural-networks/ | ✅ Taught |
-| 3 | Overfitting & Regularization | neural-networks/ | ⏳ Pending |
+| 3 | Overfitting & Regularization | neural-networks/ | ✅ Taught |
 | 4 | PyTorch — deep learning framework | [pytorch/](pytorch/) | ✅ Taught |
 | 5 | Attention Mechanism | transformers/ | ⏳ Pending |
 | 6 | Self-Attention & Multi-Head Attention | transformers/ | ⏳ Pending |
