@@ -11,6 +11,19 @@ Teaching style: Analogy → ASCII Diagram (architecture/flow) → Technical → 
 
 ## Progress Tracker
 
+### WEEK 1-2 — PYTHON & ML BASICS
+| # | Concept | Folder | Status |
+|---|---------|--------|--------|
+| W1 | NumPy — math engine of ML | [python-ml-basics/](python-ml-basics/) | ✅ Taught |
+| W2 | Pandas — loading & preparing data | python-ml-basics/ | ✅ Taught |
+| W3 | Matplotlib — visualizing data | python-ml-basics/ | ✅ Taught |
+| W4 | async/await — concurrent API calls | python-ml-basics/ | ✅ Taught |
+| M1 | Linear Algebra for ML | [math-foundations/](math-foundations/) | ✅ Taught |
+| M2 | Probability & Statistics for ML | math-foundations/ | ✅ Taught |
+| C1 | Supervised vs Unsupervised Learning | [ml-core/](ml-core/) | ✅ Taught |
+| C2 | Train/Test Split & Cross-Validation | ml-core/ | ✅ Taught |
+| C3 | Loss Functions (MSE, BCE, CCE) | ml-core/ | ✅ Taught |
+
 ### MONTH 1 — FOUNDATIONS (October 2026)
 | # | Concept | Folder | Status |
 |---|---------|--------|--------|
@@ -60,7 +73,10 @@ Teaching style: Analogy → ASCII Diagram (architecture/flow) → Technical → 
 ```
 LEARNING/
 ├── MEMORY.md                  ← This file (master index)
-├── neural-networks/           ← Week 1-2 foundations
+├── python-ml-basics/          ← NumPy, Pandas, Matplotlib, async/await
+├── math-foundations/          ← Linear algebra, probability & statistics
+├── ml-core/                   ← Supervised/unsupervised, train/test, loss functions
+├── neural-networks/           ← Neural nets, backprop, optimizers, regularization
 ├── transformers/              ← Attention + Transformer architecture
 ├── pytorch/                   ← PyTorch framework
 ├── huggingface/               ← HuggingFace ecosystem
